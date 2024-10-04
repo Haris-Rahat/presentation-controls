@@ -1,7 +1,8 @@
 import { CameraControls, useProgress } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
+import useIsMobile from "./hooks/useIsMobile";
 
 const paddingInsets = [10, 700, 10, 10];
 
@@ -9,8 +10,13 @@ const CustomCameraControls: React.FC<{
   currentAttachment: string | null;
 }> = ({ currentAttachment }) => {
   const cameraRef = useRef<CameraControls>(null);
-  const { scene, gl } = useThree();
+  const { scene, gl, camera } = useThree();
   const { loaded } = useProgress();
+  const { isMobile } = useIsMobile();
+
+  const paddingInsets = useMemo(() => {
+    return isMobile ? [1, 1, 1, 1] : [10, 700, 10, 10];
+  }, [isMobile]);
 
   const paddingInCssPixel = useCallback(
     async (
@@ -79,10 +85,10 @@ const CustomCameraControls: React.FC<{
           const gunPositionBox =
             gunPositionMesh && new THREE.Box3().setFromObject(gunPositionMesh);
           cameraRef.current.fitToBox(gunPositionBox, true, {
-            paddingTop: 1,
-            paddingBottom: 2,
-            paddingLeft: 5,
-            paddingRight: 5,
+            paddingTop: 0,
+            paddingBottom: 0,
+            paddingLeft: isMobile ? 2 : 0,
+            paddingRight: 0,
             cover: true,
           });
           cameraRef.current.rotatePolarTo(85 * THREE.MathUtils.DEG2RAD, true);
@@ -126,9 +132,17 @@ const CustomCameraControls: React.FC<{
           }
         }
       }
-    }, 500);
+    }, 0);
     return () => clearTimeout(id);
-  }, [loaded, currentAttachment, scene, paddingInCssPixel, gl]);
+  }, [
+    loaded,
+    currentAttachment,
+    scene,
+    isMobile,
+    paddingInCssPixel,
+    paddingInsets,
+    gl,
+  ]);
 
   useEffect(() => {
     handleResize();
@@ -144,11 +158,20 @@ const CustomCameraControls: React.FC<{
   return (
     <CameraControls
       ref={cameraRef}
+      // minDistance={10}
+      // maxDistance={10}
+      minZoom={1}
+      maxZoom={10}
       mouseButtons={{
         left: 0,
         right: 0,
-        wheel: 0,
+        wheel: 16,
         middle: 0,
+      }}
+      touches={{
+        one: 0,
+        two: 0,
+        three: 0,
       }}
     />
   );

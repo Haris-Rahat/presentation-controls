@@ -1,6 +1,7 @@
 import {
   ContactShadows,
   Environment,
+  Loader,
   PerspectiveCamera,
   Stats,
 } from "@react-three/drei";
@@ -10,6 +11,7 @@ import * as THREE from "three";
 import Gun from "./gun";
 import Background from "./background";
 import CustomCameraControls from "./custom-camera-controls";
+import PanCameraFromCursorControls from "./pan-camera-from-cursor-controls";
 // import CustomCameraControls from "./custom-camera-controls";s
 
 function App() {
@@ -51,6 +53,7 @@ function App() {
           far={4}
         />
         <Environment preset={"warehouse"} />
+        {/* <PanCameraFromCursorControls isMobile={false} /> */}
       </Canvas>
     </div>
   );

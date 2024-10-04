@@ -6,7 +6,7 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 const Background: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
-  const gltf = useLoader(GLTFLoader, "/background.glb", (loader) => {
+  const gltf = useLoader(GLTFLoader, "/newBackground.glb", (loader) => {
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath(
       "https://www.gstatic.com/draco/versioned/decoders/1.5.3/"
@@ -30,7 +30,7 @@ const Background: React.FC = () => {
   if (loading) return null;
 
   return (
-    <mesh scale={[3, 3, 3]}>
+    <mesh scale={[3, 3, 3]} rotation={[0, 0.5, 0]}>
       <primitive object={gltf.scene} />
     </mesh>
   );

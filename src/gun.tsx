@@ -10,10 +10,10 @@ const Gun: React.FC<{
 }> = ({ setCurrentAttachment }) => {
   const [loading, setLoading] = useState(false);
   const { scene } = useThree();
-  const scopeMesh = scene.getObjectByName("scopes-cube");
-  const silencerMesh = scene.getObjectByName("silencers-cube");
-  const stockMesh = scene.getObjectByName("stocks-cube");
-  const handGuardMesh = scene.getObjectByName("handguards-cube");
+  const scopeMesh = scene.getObjectByName("scope-attachment");
+  const silencerMesh = scene.getObjectByName("silencer-attachment");
+  const stockMesh = scene.getObjectByName("stock-attachment");
+  const handGuardMesh = scene.getObjectByName("handguard-attachment");
 
   const renderAttachmentSelectors = useCallback(
     () =>
@@ -62,7 +62,7 @@ const Gun: React.FC<{
     ]
   );
 
-  const gltf = useLoader(GLTFLoader, "/gun.glb", (loader) => {
+  const gltf = useLoader(GLTFLoader, "/newGun.glb", (loader) => {
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath(
       "https://www.gstatic.com/draco/versioned/decoders/1.5.3/"
@@ -96,10 +96,6 @@ const Gun: React.FC<{
       </mesh>
     </PresentationControls>
   );
-  // minPolarAngle={Math.PI / 2} // Limit how much you can look down (90 degrees)
-  //       maxPolarAngle={Math.PI / 2} // Limit how much you can look up (90 degrees)
-  //       minAzimuthAngle={-Infinity} // Limit horizontal rotation to the left (360 degrees)
-  //       maxAzimuthAngle={Infinity} // Limit horizontal rotation to the right (360 degrees)
 };
 
 export default Gun;
