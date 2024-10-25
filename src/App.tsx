@@ -1,23 +1,15 @@
-import {
-  ContactShadows,
-  Environment,
-  Loader,
-  PerspectiveCamera,
-  Stats,
-} from "@react-three/drei";
+import { ContactShadows, PerspectiveCamera, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useState } from "react";
 import * as THREE from "three";
 import Gun from "./gun";
 import Background from "./background";
 import CustomCameraControls from "./custom-camera-controls";
-import PanCameraFromCursorControls from "./pan-camera-from-cursor-controls";
 import Lights from "./lights";
-// import CustomCameraControls from "./custom-camera-controls";s
 
 function App() {
   const [currentAttachment, setCurrentAttachment] = useState<string | null>(
-    null
+    null,
   );
   return (
     <div className={"wrapper"}>
@@ -55,7 +47,6 @@ function App() {
           far={4}
         />
         <Lights />
-        <PanCameraFromCursorControls isMobile={false} />
       </Canvas>
     </div>
   );

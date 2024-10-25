@@ -6,12 +6,6 @@ const size = {
   desktop: 2560,
 };
 
-const device = {
-  mobile: `max-width: ${size.mobile}px`,
-  tablet: `max-width: ${size.tablet}px`,
-  desktop: `max-width: ${size.desktop}px`,
-};
-
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
 
