@@ -6,10 +6,10 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 const Background: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
-  const gltf = useLoader(GLTFLoader, "/newBackground.glb", (loader) => {
+  const gltf = useLoader(GLTFLoader, "/background2.glb", (loader) => {
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath(
-      "https://www.gstatic.com/draco/versioned/decoders/1.5.3/"
+      "https://www.gstatic.com/draco/versioned/decoders/1.5.3/",
     );
     loader.setDRACOLoader(dracoLoader);
 

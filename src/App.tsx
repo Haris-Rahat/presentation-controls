@@ -12,6 +12,7 @@ import Gun from "./gun";
 import Background from "./background";
 import CustomCameraControls from "./custom-camera-controls";
 import PanCameraFromCursorControls from "./pan-camera-from-cursor-controls";
+import Lights from "./lights";
 // import CustomCameraControls from "./custom-camera-controls";s
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
   return (
     <div className={"wrapper"}>
       <Canvas
+        id={"scene"}
         camera={{ fov: 75 }}
         gl={{
           alpha: true,
@@ -52,8 +54,8 @@ function App() {
           blur={3}
           far={4}
         />
-        <Environment preset={"warehouse"} />
-        {/* <PanCameraFromCursorControls isMobile={false} /> */}
+        <Lights />
+        <PanCameraFromCursorControls isMobile={false} />
       </Canvas>
     </div>
   );

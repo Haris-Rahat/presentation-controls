@@ -4,13 +4,11 @@ import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import useIsMobile from "./hooks/useIsMobile";
 
-const paddingInsets = [10, 700, 10, 10];
-
 const CustomCameraControls: React.FC<{
   currentAttachment: string | null;
 }> = ({ currentAttachment }) => {
   const cameraRef = useRef<CameraControls>(null);
-  const { scene, gl, camera } = useThree();
+  const { scene, gl } = useThree();
   const { loaded } = useProgress();
   const { isMobile } = useIsMobile();
 
@@ -86,8 +84,8 @@ const CustomCameraControls: React.FC<{
             gunPositionMesh && new THREE.Box3().setFromObject(gunPositionMesh);
           cameraRef.current.fitToBox(gunPositionBox, true, {
             paddingTop: 0,
-            paddingBottom: 0,
-            paddingLeft: isMobile ? 2 : 0,
+            paddingBottom: -1,
+            paddingLeft: isMobile ? 2 : 3,
             paddingRight: 0,
             cover: true,
           });
@@ -160,8 +158,6 @@ const CustomCameraControls: React.FC<{
       ref={cameraRef}
       // minDistance={10}
       // maxDistance={10}
-      minZoom={1}
-      maxZoom={10}
       mouseButtons={{
         left: 0,
         right: 0,

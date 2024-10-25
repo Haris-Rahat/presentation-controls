@@ -62,7 +62,7 @@ const Gun: React.FC<{
     ]
   );
 
-  const gltf = useLoader(GLTFLoader, "/newGun.glb", (loader) => {
+  const gltf = useLoader(GLTFLoader, "/gun.glb", (loader) => {
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath(
       "https://www.gstatic.com/draco/versioned/decoders/1.5.3/"
